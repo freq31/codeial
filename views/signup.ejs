@@ -1,0 +1,15 @@
+<body>
+    <h1><%= title%></h1>
+    <form action="/users/create-user" method="POST">
+        <label for="email">Email</label>
+        <input type="email" required name="email">
+        
+        <label for="password">Password</label>
+        <input type="password" required name="password">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" required name="confirm_password">
+        <label for="name">Name</label>
+        <input type="string" required name="name">
+        <button type="submit">Submit</button>
+    </form>
+</body>
