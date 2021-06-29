@@ -2,9 +2,31 @@ const db=require('../config/mongoose');
 const user=require('../models/user');
 module.exports.profile=function(req,res){
     //return res.end('<h1>user profile</h1>');
-    return res.render('users',{
-        title:"users profile"
-    });
+    if(req.cookies.user_id){
+        user.findById(req.cookies.user_id,function(err,User){
+            if(err){
+                console.log('error in showing profile');
+                return;
+
+            }
+            if(User){
+                return res.render('users',{
+                    title:"users profile",
+                    user:User
+                });
+            }
+            else{
+                return res.redirect('/users/signin');
+
+            }
+            
+        })
+
+    }
+    else{
+        return res.redirect('/users/signin');
+    }
+    
 }
 module.exports.signin=function(req,res){
     return res.render('signin',{
@@ -48,5 +70,37 @@ module.exports.createuser=function(req,res){
 
 }
 module.exports.verify_user=function(req,res){
+    //steps to authenticate:
+    //find the user
+    user.findOne({email:req.body.email},function(err,User){
+        if(err){
+            console.log('error in finding user in signing in');
+            return;
+        };
+        //handle user found
+        if(User){
+            //handle mismatching passwords which don't match
+            if(User.password!=req.body.password){
+                return res.redirect('back');
+            }
+            //handle session creation
+            res.cookie('user_id',User.id);
+            return res.redirect('/users/profile');
+        }
+        else{
+            //handle user not found
+            return res.redirect('back');
+
+
+        }
+    })
+    
+      
+    
+
+}
+module.exports.signout=function(req,res){
+    delete req.cookies.user_id;
+    return res.redirect('/users/signin');
 
 }
