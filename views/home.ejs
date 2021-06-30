@@ -1,2 +1,28 @@
 <h1>codeial <%=title%></h1>
+<section id="feed-posts">
+    
+    <%if(locals.user){%>
+        <h4>Posts</h4>
+        <form action="/posts/add-post" id="new-post-form" method="POST">
+            <textarea name="content" cols="30" rows="3" placeholder="Type Here .."></textarea>
+            <input type="submit" value="POST">
+        </form>
+        <ul>
+            <%for (let i of posts){%>
+                <li>
+                    <%=i.content%>
+                    <name>
+                        <%=i.user.name%>
+
+                    </name>
+                </li>
+                
+            <%}%>
+        </ul>
+    <%}%>
+
+    
+
+</section>
+
        
