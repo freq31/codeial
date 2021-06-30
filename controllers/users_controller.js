@@ -7,11 +7,17 @@ module.exports.profile=function(req,res){
     });
 }
 module.exports.signin=function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('signin',{
         title:"sign in"
     });
 }
 module.exports.signup=function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('signup',{
         title:"sign up"
     });
@@ -48,5 +54,10 @@ module.exports.createuser=function(req,res){
 
 }
 module.exports.verify_user=function(req,res){
+    return res.redirect('/');
+}
 
+module.exports.endsession=function(req,res){
+    req.logout();
+    return res.redirect('/');
 }
