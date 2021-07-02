@@ -1,4 +1,5 @@
 const Post=require('../models/post');
+const User=require('../models/user');
 module.exports.home=function(req,res){
     Post.find({})
     .populate('user')
@@ -13,10 +14,19 @@ module.exports.home=function(req,res){
             console.log('error in fetching posts from db',err);
             return;
         }
-        console.log(post);
-        return res.render('home',{
-            title:"home",
-            posts:post,
-        });
+        User.find({},function(err,user){
+            if(err){
+                console.log('error in fetching users from db',err);
+                return;
+            }
+            return res.render('home',{
+                title:"home",
+                posts:post,
+                users:user
+            });
+
+        })
+        
+        
     });
 }

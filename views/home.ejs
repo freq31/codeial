@@ -7,48 +7,28 @@
             <textarea name="content" cols="30" rows="3" placeholder="Type Here .." required></textarea>
             <input type="submit" value="POST">
         </form>
-        
+    <%}%>
         <ul>
-            <%for (let i of posts){%>
-                <li>
-                    <%=i.content%>
-                    <name>
-                        <%=i.user.name%>
-
-                    </name>
-                    <comments class="post-comments"> 
-                        <%if(locals.user){%>
-                            <form action="/comments/add-comments" id="new-comment-form" method="POST">
-                                <input type="text" name="content" placeholder="add comment" required>
-                                <input type="hidden" name="post" value="<%=i._id%>">
-                                <input type="submit" value="Comment">
-                            </form>
-                            <div class="post-comments-list">
-                                <ul id="post-comments-<%= i._id%>">
-                                    <%for (let j of i.comments){%>
-                                        <li>
-                                            <%=j.content%>
-                                            <name>
-                                                <%=j.user.name%>
-                                            </name>
-                                            
-                                        </li>
-                                        
-                                    <%}%>
-                                </ul>
-                            </div>
-                        <%}%>
-
-                    </comments>
-                    
-                </li>
-                
+            <%for (i of posts){%>
+            <%- include('_post'); %>
             <%}%>
         </ul>
-    <%}%>
+    
 
     
 
+</section>
+<section>
+    <%if(locals.user){%>
+        <h4>Friends</h4>
+        <%for (user of users){%>
+            <p>
+                <a href="/users/profile/<%=user.id%>"><%=user.name%></a>
+            </p>
+        <%}%>
+
+    <%}%>
+    
 </section>
 
        

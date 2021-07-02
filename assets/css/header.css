@@ -1,0 +1,13 @@
+header {
+  height: 10%;
+  background-color: blue; }
+  header ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between; }
+    header ul #sign-in-out-links {
+      display: flex;
+      justify-content: space-evenly; }
+    header ul li a {
+      text-decoration: none;
+      color: white; }

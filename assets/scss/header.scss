@@ -1,0 +1,20 @@
+header{
+    height: 10%;
+    background-color: blue;
+    ul{
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        #sign-in-out-links{
+            display: flex;
+            justify-content:space-evenly;
+        }
+        li{
+            
+            a{
+                text-decoration: none;
+                color:white;
+            }
+        }
+    }
+}

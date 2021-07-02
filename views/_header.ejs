@@ -1,21 +1,25 @@
 <header>
-    Page header
+    
     <ul>
         <%if(locals.user){%>
-            <li>
-                <a href="/users/profile"><%= user.name %></a>
-            </li>
-            
-            <li>
-                <a href="/users/signout">Sign Out</a>
-            </li>
-        <%}else{%>
-            <li>
-                <a href="/users/signin">Sign In</a>
-            </li>
-            <li>
-                <a href="/users/signup">Sign Up</a>
-            </li>
-        <%}%>
+            <div id="profile">
+                <li>
+                    <a href="/users/profile/<%=user.id%>"><%= user.name %></a>
+                </li>
+            </div>
+            <div id="sign-in-out-links">
+                <li>
+                    <a href="/users/signout">Sign Out</a>
+                </li>
+            <%}else{%>
+                <li>
+                    <a href="/users/signin">Sign In</a>
+                </li>
+                <li>
+                    <a href="/users/signup">Sign Up</a>
+                </li>
+
+            </div>
+            <%}%>
     </ul>
  </header>

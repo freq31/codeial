@@ -2,13 +2,17 @@ const db=require('../config/mongoose');
 const user=require('../models/user');
 module.exports.profile=function(req,res){
     //return res.end('<h1>user profile</h1>');
-    return res.render('users',{
-        title:"users profile"
-    });
+    user.findById(req.params.id,function(err,user){
+        return res.render('users',{
+            title:"users profile",
+            user_profile:user
+        });
+    })
+    
 }
 module.exports.signin=function(req,res){
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.redirect('/users/profile/req.user.id');
     }
     return res.render('signin',{
         title:"sign in"
@@ -16,7 +20,7 @@ module.exports.signin=function(req,res){
 }
 module.exports.signup=function(req,res){
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.redirect('/users/profile/req.user.id');
     }
     return res.render('signup',{
         title:"sign up"
@@ -60,4 +64,14 @@ module.exports.verify_user=function(req,res){
 module.exports.endsession=function(req,res){
     req.logout();
     return res.redirect('/');
+}
+module.exports.update=function(req,res){
+    if(req.user.id==req.params.id){
+        user.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            return res.redirect('back');
+        });
+    }
+    else{
+        return res.status(401).send('Unauthorized');
+    }
 }
