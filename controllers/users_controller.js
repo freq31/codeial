@@ -75,3 +75,16 @@ module.exports.update=function(req,res){
         return res.status(401).send('Unauthorized');
     }
 }
+module.exports.friends=function(req,res){
+    user.find({},function(err,user){
+        if(err){
+            console.log('error in fetching users from db',err);
+            return;
+        }
+        return res.render('friends',{
+            title:"friends-list",
+            users:user
+        });
+
+    })
+}

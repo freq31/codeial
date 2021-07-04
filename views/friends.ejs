@@ -1,0 +1,9 @@
+<%if(locals.user){%>
+    <h4>Friends-List</h4>
+    <%for (user of users){%>
+        <p>
+            <a href="/users/profile/<%=user.id%>"><%=user.name%></a>
+        </p>
+    <%}%>
+
+<%}%>

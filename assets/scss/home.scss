@@ -1,0 +1,29 @@
+#home-content{
+    display: flex;
+    height:70%;
+    #feed-posts{
+        width:70%;
+        #post-form{
+            position: relative;
+            top:5%;
+            left:-30%;
+
+        }
+        #posts-list{
+            ul{
+                list-style: none;
+                li{
+                    margin-top: 2%;
+                    height:20%;
+                    width:100%;
+                }
+            }
+        }
+
+    }
+    #friends-list{
+        width:30%;
+        height:100%;
+        border-left: 2px solid black;
+    }
+}

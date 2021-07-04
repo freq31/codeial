@@ -1,11 +1,31 @@
 <header>
     
+    
     <ul>
+        <li id="logo">
+            <a href="/"><i class="fas fa-link"></i></a>
+        </li>
         <%if(locals.user){%>
             <div id="profile">
                 <li>
-                    <a href="/users/profile/<%=user.id%>"><%= user.name %></a>
+                    <a href="/users/profile/<%=user.id%>"><i class="far fa-user"></i></a>
                 </li>
+            </div>
+            <div id="messages">
+                <li>
+                    <a href="/users/messages"><i class="far fa-envelope"></i></a>
+                </li>
+            </div>
+            <div id="friends">
+                <li>
+                    <a href="/users/friends"><i class="fas fa-user-friends"></i></a>
+                </li>
+            </div>
+            <div id="search-form">
+                <form>
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                    <input type="text" name="search" placeholder="Search.."  required>
+                </form>
             </div>
             <div id="sign-in-out-links">
                 <li>

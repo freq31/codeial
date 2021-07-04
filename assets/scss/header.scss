@@ -1,10 +1,15 @@
 header{
     height: 10%;
     background-color: blue;
+    #logo{
+        position: fixed;
+        top:0%;
+        left:0%;
+    }
     ul{
         list-style: none;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         #sign-in-out-links{
             display: flex;
             justify-content:space-evenly;

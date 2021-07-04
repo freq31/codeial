@@ -17,4 +17,5 @@ router.post('/verify-user',passport.authenticate(
     {failureRedirect:'/users/signin'},
 ),userController.verify_user);
 router.get('/signout',userController.endsession);
+router.get('/friends',passport.checkAuthentication,userController.friends);
 module.exports=router;

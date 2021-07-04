@@ -1,10 +1,14 @@
 header {
   height: 10%;
   background-color: blue; }
+  header #logo {
+    position: fixed;
+    top: 0%;
+    left: 0%; }
   header ul {
     list-style: none;
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-evenly; }
     header ul #sign-in-out-links {
       display: flex;
       justify-content: space-evenly; }
