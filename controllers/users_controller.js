@@ -32,7 +32,7 @@ module.exports.createuser=function(req,res){
     }
     user.findOne({email:req.body.email},function(err,User){
         if(err){
-            console.log('error in finding user in signing up');
+            req.flash('error',err);
             return ;
         }
         if(!User){
@@ -42,9 +42,10 @@ module.exports.createuser=function(req,res){
                 name:req.body.name
         
             },function(err,User){
-                if(err){console.log('error in creating the task');
+                if(err){req.flash('error',err);
                 return;}
                 //return back to the home page after adding new task
+                req.flash('success','Congrats you have been successfully registered');
                 return res.redirect('/users/signin');
             });
 
@@ -58,20 +59,25 @@ module.exports.createuser=function(req,res){
 
 }
 module.exports.verify_user=function(req,res){
+    req.flash('success','Logged in successfully');
     return res.redirect('/');
 }
 
 module.exports.endsession=function(req,res){
     req.logout();
+    req.flash('success','You have logged Out');
     return res.redirect('/');
 }
 module.exports.update=function(req,res){
     if(req.user.id==req.params.id){
         user.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            req.flash('success','Your details have been successfully updated');
             return res.redirect('back');
         });
+        
     }
     else{
+        req.flash('error','Unauthorized');
         return res.status(401).send('Unauthorized');
     }
 }

@@ -13,8 +13,8 @@ module.exports.addnewpost=function(req,res){
         content:req.body.content,
         user:req.user._id
     },function(err,post){
-        if(err){console.log('error in creating a post');return;}
-        console.log(req);
+        if(err){req.flash('error',err);return;}
+        req.flash('success','Post Published');
         return res.redirect('back');
 
     
@@ -22,19 +22,26 @@ module.exports.addnewpost=function(req,res){
     });
     
 }
-module.exports.destroy=function(req,res){
-    Post.findById(req.params.id,function(err,post){
-        //.id means converting object id to strings
-        if(post.user==req.user.id){
-            post.remove();
-            Comments.deleteMany({post:req.params.id},function(err){
-                return res.redirect('back');
-            })
-
-        }
-        else{
+module.exports.destroy=async function(req,res){
+    //.id means converting object id to strings
+    try{
+        let posts=await Post.findById(req.params.id);
+        if(posts.user==req.user.id){
+            posts.remove();
+            await Comments.deleteMany({post:req.params.id});
+            req.flash('success','Post and associated comments deleted');
             return res.redirect('back');
 
         }
-    })
+        else{
+            req.flash('error','you cannot delete this post');
+            return res.redirect('back');
+
+        }
+
+    }catch(err){
+        req.flash('error',err);
+        return;
+    }
+    
 }

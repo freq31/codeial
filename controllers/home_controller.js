@@ -1,32 +1,30 @@
 const Post=require('../models/post');
 const User=require('../models/user');
-module.exports.home=function(req,res){
-    Post.find({})
-    .populate('user')
-    .populate({
-        path:'comments',
-        populate:{
-            path:'user'
-        }
-    })
-    .exec(function(err,post){
-        if(err){
-            console.log('error in fetching posts from db',err);
-            return;
-        }
-        User.find({},function(err,user){
-            if(err){
-                console.log('error in fetching users from db',err);
-                return;
+module.exports.home= async function(req,res){
+    try{
+        let posts=await Post.find({})
+        .populate('user')
+        .populate({
+            path:'comments',
+            populate:{
+                path:'user'
             }
-            return res.render('home',{
-                title:"home",
-                posts:post,
-                users:user
-            });
-
-        })
-        
-        
-    });
+        });
+        let users=await User.find({});
+        return res.render('home',{
+            title:"home",
+            posts:posts,
+            users:users
+        });
+    }catch(err){
+        console.log('Error',err);
+        return;
+    }
+    
 }
+//using then
+//Post.find({}).populate('comments).then(function());
+
+//using promises
+//let posts=Post.find({}).populate('comments').exec();
+//posts.then()
