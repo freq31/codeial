@@ -8,10 +8,10 @@
         <div class="post-comments-list">
             <ul id="post-comments-<%= i._id%>">
                 <%for (let j of i.comments){%>
-                    <li>
+                    <li id="comment-<%=j._id%>">
                         <%if(locals.user && locals.user.id==j.user.id){%>
                             <small>
-                                <a href="/comments/destroy/<%=j.id%>">del</a>
+                                <a class="delete-comment-button" href="/comments/destroy/<%=j.id%>">del</a>
                             </small>
                         <%}%>
                         <%=j.content%>
