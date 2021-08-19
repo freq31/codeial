@@ -62,6 +62,7 @@ app.use(customMiddleware.setFlash);
 app.use('/',require('./routes/index'));
  app.listen(port,function(err){
      if(err){
+         console.log(err);
          console.log(`error is running the server: ${err}`);
          return;
      }

@@ -14,10 +14,7 @@
             <div id="posts-list">
                 <ul>
                     <%for (i of posts){%>
-                        <div>
-                            <%- include('_post'); %>
-                        </div>
-                    
+                        <%- include('_post'); %>
                     <%}%>
                 </ul>
             </div>
@@ -30,6 +27,7 @@
         <%- include('friends'); %> 
     </section>
 </div>
+<script src="/js/home_posts_comment.js" ></script>
 <script src="/js/home_posts.js">
 </script>
 
