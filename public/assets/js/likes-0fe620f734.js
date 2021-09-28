@@ -1,0 +1,1 @@
+let likes=document.getElementById("likes");

@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/css/signin.css">
+<link rel="stylesheet" href="<%= assetPath('css/signin.css') %>">
+
 <body>
     <h1><%=title%></h1>
     <form action="/users/verify-user" method="POST">
@@ -9,4 +10,10 @@
         <input type="password" required name="password">
         <button type="submit">Sign in</button>
     </form>
+    <p>
+        <a href="/users/auth/google">Google sign-in/sign-up</a>
+    </p>
+    <p>
+        <a href="">Forgot Password</a>
+    </p>
 </body>

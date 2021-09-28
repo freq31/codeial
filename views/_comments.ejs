@@ -18,9 +18,15 @@
                         <name>
                             <%=j.user.name%>
                         </name>
-                        
+                        <div id="likes-<%=j._id%>">
+                            <div id="likes-number-<%=j._id%>">
+                                <%=j.likes.length%>
+                            </div>
+                            <form action="/likes/add-likes/<%=j._id%>" method="POST" id="likes-form-<%=j._id%>">
+                                <button type="submit"><i class="far fa-thumbs-up"></i></button>
+                            </form>
+                        </div>
                     </li>
-                    
                 <%}%>
             </ul>
         </div>

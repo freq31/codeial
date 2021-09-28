@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/css/signup.css">
+<link rel="stylesheet" href="<%= assetPath('css/signup.css') %>">
+
 <body>
     <h1><%= title%></h1>
     <form action="/users/create-user" method="POST">
@@ -13,4 +14,7 @@
         <input type="string" required name="name">
         <button type="submit">Submit</button>
     </form>
+    <p>
+        <a href="/users/auth/google">Google sign-in/sign-up</a>
+    </p>
 </body>

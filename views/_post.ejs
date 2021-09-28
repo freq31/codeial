@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<%= assetPath('css/posts.css') %>">
+
 <li id="post-<%=i._id%>">
     <%if(locals.user && locals.user.id==i.user.id){%>
     <small>
@@ -8,6 +10,15 @@
     <name>
         <%=i.user.name%>
     </name>
-    <%- include('_comments'); %>
-    
+    <div>
+        <div id="likes-<%=i._id%>">
+            <div id="likes-number-<%=i._id%>">
+                <%=i.likes.length%>
+            </div>
+            <form action="/likes/add-likes/<%=i._id%>" method="POST" id="likes-form-<%=i._id%>">
+                <button type="submit"><i class="far fa-thumbs-up"></i></button>
+            </form>
+        </div>
+        <%- include('_comments'); %>
+    </div>
 </li>

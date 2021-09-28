@@ -2,6 +2,7 @@ const db=require('../config/mongoose');
 const Post=require('../models/post');
 const Comments = require('../models/comments');
 const User=require('../models/user');
+const Like=require('../models/like');
 module.exports.posts=function(req,res){
     //return res.end('<h1>user posts</h1>');
     return res.render('posts',{
@@ -37,6 +38,8 @@ module.exports.destroy=async function(req,res){
         if(posts.user==req.user.id){
             posts.remove();
             await Comments.deleteMany({post:req.params.id});
+            await Like.deleteMany({likeable:req.params.id,onModel:'Post'});
+            await Like.deleteMany({_id:{$in:post.comments}});
             if(req.xhr){
                 return res.status(200).json({
                     data:{

@@ -18,4 +18,7 @@ router.post('/verify-user',passport.authenticate(
 ),userController.verify_user);
 router.get('/signout',userController.endsession);
 router.get('/friends',passport.checkAuthentication,userController.friends);
+//google-login
+router.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
+router.get('/auth/google/callback',passport.authenticate('google',{failureRedirect:'/users/sign-in'}),userController.verify_user);
 module.exports=router;
