@@ -40,7 +40,7 @@ app.use('/uploads',express.static(__dirname+'/uploads'));
 app.use(logger(env.morgan.mode,env.morgan.options));
 app.use(expresslayouts);
 //encode the form data
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 //extract style and scripts from pages into the layout
 app.set('layout extractStyles',true);
